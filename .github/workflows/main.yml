@@ -28,10 +28,9 @@ jobs:
       - name: Build with Jib
         run: |
           chmod +x ./gradlew
+          
+          ./gradlew jib -Djib.to.image=${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}} -Djib.to.tags=${{ github.sha }},latest
 
-          
-          
-          ./gradlew jib -Djib.to.image=${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}} -Djib.to.tags=${{ github.event.pull_request.number }},latest
 
       - name: Deploy
         uses: appleboy/ssh-action@master
