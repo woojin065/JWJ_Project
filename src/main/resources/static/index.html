@@ -32,13 +32,39 @@
 <p id="resultMessage"></p>
 
 <script>
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let randomNumber = null;
     let attempts = 0;
+
+    // 서버에서 랜덤 숫자 받아오기
+    async function fetchRandomNumber() {
+        try {
+            const response = await fetch('http://localhost:8080/email', {
+                method: 'POST',
+                headers: {
+                    'accept': '*/*',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            randomNumber = data; // 서버에서 받아온 랜덤 숫자 저장
+            console.log("서버에서 받아온 랜덤 숫자: ", randomNumber);
+        } catch (error) {
+            console.error("랜덤 숫자 받아오기 실패: ", error);
+        }
+    }
+
+    // 페이지 로드 시 서버에서 랜덤 숫자 받아오기
+    window.onload = fetchRandomNumber;
 
     function checkGuess() {
         const userGuess = document.getElementById('guessInput').value;
         const resultMessage = document.getElementById('resultMessage');
         attempts++;
+
+        if (randomNumber === null) {
+            resultMessage.textContent = "랜덤 숫자를 불러오는 중입니다. 잠시만 기다려주세요.";
+            return;
+        }
 
         if (userGuess == randomNumber) {
             resultMessage.textContent = `축하합니다! ${attempts}번 만에 맞추셨습니다!`;
