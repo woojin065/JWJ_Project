@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: JWJ_Project
+
+
+springDoc:
+    api-docs:
+        enabled: true
+        path: /api/api-docs
+        swagger-ui:
+            path: /api/swagger
