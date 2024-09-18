@@ -29,7 +29,6 @@ jobs:
         run: |
           chmod +x ./gradlew
 
-          source .bashrc
           
           rm src/main/resources/secrets.properties 
           rm .bashrc
