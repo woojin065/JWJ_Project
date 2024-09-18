@@ -1,5 +1,4 @@
 name: Build And Deploy
-\
 
 jobs:
   deploy:
