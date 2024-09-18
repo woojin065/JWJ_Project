@@ -21,6 +21,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("API")
                         .version("1.0")
-                        .description("Base URL: /")); 
+                        .description("Base URL: /"));
     }
 }
